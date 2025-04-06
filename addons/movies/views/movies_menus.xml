@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo> 
+    <menuitem
+        id="movie_menu_root"
+        name="Movies"
+        web_icon="static/description/icon.png"
+        sequence="10">
+        <menuitem
+            id="movie_menu"
+            name="Películas"
+            sequence="10">
+            <menuitem
+                id="menu_movie_movie_action_view"
+                action="movie_movie_action_view"/>
+        </menuitem>
+    </menuitem>
+</odoo>

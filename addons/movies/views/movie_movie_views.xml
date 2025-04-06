@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="movie_movie_form_view" model="ir.ui.view">
+        <field name="name">movie.movie.form.view</field>
+        <field name="model">movie.movie</field>
+        <field name="arch" type="xml">
+            <form create="false">
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="movie_title"/>
+                        <field name="ranking_movie"/>        
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="movie_movie_list_view" model="ir.ui.view">
+        <field name="name">movie.movie.list.view</field>
+        <field name="model">movie.movie</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="movie_title"/>
+                <field name="ranking_movie"/>        
+            </list>
+        </field>
+    </record>
+
+    <record id="movie_movie_search_view" model="ir.ui.view">
+        <field name="name">movie.movie.search.view</field>
+        <field name="model">movie.movie</field>
+        <field name="arch" type="xml">
+            <search string="Movie">
+                <field name="movie_title"/>
+                <field name="ranking_movie"/>
+                <group expand="1" string="Group By">
+                    <filter string="Ranking" name="ranking_movie" context="{'group_by': 'ranking_movie'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="movie_movie_action_view" model="ir.actions.act_window">
+        <field name="name">Movies</field>
+        <field name="res_model">movie.movie</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Movie
+            </p>
+        </field>
+    </record>
+</odoo>

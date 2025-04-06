@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo> 
+    <menuitem
+        id="eventos_menu"
+        name="Visor de Eventos"
+        sequence="10"
+        parent="movie_menu_root">
+        <menuitem
+            id="eventos_registrados_menu"
+            name="Eventos Registrados"
+            action="visor_eventos_action_view"
+            sequence="10"/>
+    </menuitem>
+</odoo>
