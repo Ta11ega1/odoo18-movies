@@ -1,0 +1,43 @@
+services:
+  web:
+    image: odoo:18.0-20250401
+    
+    # command: ["./etc/odoo/wait-for-psql.py", "--db_host", "odoo17-db-1", "--db_port", "5432", "--db_user", "postgres", "--db_password", "", "--timeout", "60"]
+
+    depends_on:
+      - db
+    ports:
+      - "8045:8069"
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./config:/etc/odoo
+      - ./addons:/mnt/extra-addons
+      - ./log:/var/log/odoo
+      - ./enterprise/addons:/mnt/enterprise/addons
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=admin
+    networks:  # Agregamos la red aquí
+      - my_network
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_USER=odoo
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - "5445:5432"
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data/pgdata
+    networks:  # Agregamos la red aquí
+      - my_network
+
+networks:  # Definimos la red aquí
+  my_network:
+    driver: bridge
+
+volumes:
+  odoo-web-data:
+  odoo-db-data:
