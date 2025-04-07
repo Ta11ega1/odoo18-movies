@@ -20,7 +20,7 @@ class MovieMovie(models.Model):
 
 	def _cron_consume_api_movie(self):
 		if not self.env['ir.config_parameter'].get_param('movies.cl_url_api'):
-			self.env['visor.eventos'].create({
+			self.env['visor.eventos'].create({ # ERROR DE CONFIGURACION
 				'name': 'ERROR EN CONFIGURACION DE API',
 				'date': datetime.now(),
 				'response': "NO SE HA INGRESADO LA URL DE LA API A CONSUMIR, COMPLETE LA CONFIGURACION EN AJUSTES PARA REALIZAR EL CONSUMO",
@@ -28,7 +28,7 @@ class MovieMovie(models.Model):
 				})
 		url = self.env['ir.config_parameter'].get_param('movies.cl_url_api')
 		if not self.env['ir.config_parameter'].get_param('movies.cl_api_key'):
-			self.env['visor.eventos'].create({
+			self.env['visor.eventos'].create({ # ERROR DE CONFIGURACION
 				'name': 'ERROR EN CONFIGURACION DE API',
 				'date': datetime.now(),
 				'response': "NO SE HA INGRESADO EL API KEY PARA CONSUMIR EL SERVICIO, COMPLETE LA CONFIGURACIÓN EN AJUSTES PARA REALIZAR EL CONSUMO.",
@@ -41,23 +41,24 @@ class MovieMovie(models.Model):
 		r = requests.get(url, params=params)
 		if r.status_code == 200:
 			json = r.json()
+			### Se cubren solo dos casos, si el tipo de dato es un diccionario o una lista se crearan los objetos.
 			if not isinstance(json, dict):
 				if not isinstance(json, list):
 					for line in json:
 						if self.env['movie.movie'].search_count([('movie_title', '=', line['movie_title']), ('ranking_movie', '=', int(line['ranking_movie']))], limit=1):
-							self.env['visor.eventos'].create({
+							self.env['visor.eventos'].create({ # ERROR YA EXISTE PELICULA
 								'name': 'Hay conexión a API, no se pudo crear pelicula en sistema.',
 								'date': datetime.now(),
 								'response': 'La Pelicula ya existe en el sistema. respuesta de consumo: %s' % r.json(),
 								'state': 'ERROR',
 								})
 						else:
-							movie = self.env['movie.movie'].create({
+							movie = self.env['movie.movie'].create({ # CREA PELICULA
 								'movie_title': line['movie_title'],
 								'ranking_movie': int(line['ranking_movie'])
 							})
 							if movie:
-								self.env['visor.eventos'].create({
+								self.env['visor.eventos'].create({ 
 									'name': 'Consulta exitosa!',
 									'date': datetime.now(),
 									'response': r.json(),
