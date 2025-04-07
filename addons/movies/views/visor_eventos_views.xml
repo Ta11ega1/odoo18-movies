@@ -10,7 +10,8 @@
                         <field name="name"/>
                         <field name="date"/>        
                         <field name="response"/>        
-                        <field name="state"/>        
+                        <field name="state"/>    
+                        <field name="movie_id"/>    
                     </group>
                 </sheet>
             </form>
@@ -25,7 +26,8 @@
                 <field name="name"/>
                 <field name="date"/>        
                 <field name="response"/>        
-                <field name="state"/>           
+                <field name="state"/>     
+                <field name="movie_id"/>    
             </list>
         </field>
     </record>
