@@ -29,22 +29,22 @@ Cuando ya este configurado Odoo ir al navegador e ingresar a la siguiente ruta h
 Dar clic en el botón  ***Create Database*** utilizando la master password que aparecera en la parte del recuadro amarillo.
 
 ### Instalación de Módulo
-    ![Modulo movies](instalar_modulo.png)  
 Una vez dentro de la base de datos creada ir al módulo de aplicaciones y activar el módulo movies
+    ![Modulo](instalar_modulo.png)  
 
 ### Configurar módulo movies
 Al tener instalado el módulo ahora se debe configurar la api externa de consulta [API de Peliculas](https://random-data-api.com/api/v3/projects/a2bebcc5-69e3-4b4e-b8c0-4a2f4306f0da?api_key=ZN-BE0NeUFPRYdYrRZf7CQ)  
 
-    ![Configuración API](config_api_key.png)
 Para configurar este módulo es necesario entrar al módulo movies a través del Menú de Odoo, una vez dentro se mostrara una grilla y un menu donde se debe presionar la opción configuración.
+    ![Configuración API](config_api_key.png)
 
+Cuando se instalo el módulo movies, se creo el cron configurado a través de xml para realizar la petición a la API configurada.
     ![Cron](cron.png)
     ![Cron Odoo](cron_odoo.png)
-Cuando se instalo el módulo movies, se creo el cron configurado a través de xml para realizar la petición a la API configurada.
 
-    ![visor](visor_eventos.png)
 Cada que se ejecuta este cron va dejando un registro en una tabla llamada visor.eventos, este es un log que guarda cada consulta realizada por el sistema a la API de Peliculas.
+    ![visor](visor_eventos.png)
 
-    ![Postman](postman.png)
 A través de Postman se puede probar el Endpoint que retorna las 10 peliculas con mejor ranking.
     La url de prueba es http://localhost:8045/api/top_movies  yo le envie unas llaves vacias ya que el método es de tipo json y esta esperando una solicitud json.
+    ![Postman](postman.png)
