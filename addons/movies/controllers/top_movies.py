@@ -9,7 +9,7 @@ class TopMovies(Controller):
 
     @route('/api/top_movies', type='json', auth='public', website=True)
     def get_combination_info_website(self):
-        movies = request.env['movie.movie'].sudo().search([], order='ranking_movie desc', limit=10)
+        movies = request.env['movie.movie'].sudo().search([], order='ranking_movie desc', limit=10) # Retornar los 10 registros ordenados de manera descendente
         movie_list = []
         for movie in movies:
             movie_list.append({
@@ -17,4 +17,4 @@ class TopMovies(Controller):
                 'movie_title': movie.movie_title,
                 'ranking_movie': movie.ranking_movie,
             })
-        return json.dumps(movie_list)
+        return json.dumps(movie_list) # Retorna Json
