@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="movies_res_config_settings_form_view" model="ir.ui.view">
+        <field name="name">movies.res.config.settings.form.view</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside" >
+                <app data-string="Configuración de API Movies" string="Configuración API Movies" name="movies">
+                    <block title="Configuración de API Movies">
+                        <setting id="cl_url_api" help="Ingresa la url de la api a consumir">
+                            <field name="cl_url_api"/>
+                        </setting>
+                        <setting help="Api key proporcionada por el proveedor del servicio."
+                                 id="cl_api_key">
+                            <field name="cl_api_key"/>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_movies" model="ir.actions.act_window">
+        <field name="name">Configuración</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'movies', 'bin_size': False}</field>
+    </record>
+
+    <menuitem id="menu_movies" name="Configuración" action="action_movies" groups="base.group_system" sequence="50" parent="movie_menu_root"/>
+</odoo>

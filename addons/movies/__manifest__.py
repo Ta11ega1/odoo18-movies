@@ -18,6 +18,7 @@ Se registra los consumos de la api de peliculas en el visor de eventos.
         'views/movies_menus.xml',  # Last because referencing actions defined in previous files
         'views/visor_eventos_views.xml',
         'views/visor_eventos_menus.xml',
+        'views/res_config_settings_views.xml',
         'data/cron.xml',
     ],
     'demo': [
